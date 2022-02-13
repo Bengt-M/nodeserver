@@ -1,5 +1,6 @@
-file:/etc/systemd/system/node-temp-server.service
+## Install
 
+file: /etc/systemd/system/node-temp-server.service
 ```
 [Unit]
 Description=node-temp-server
@@ -23,7 +24,6 @@ WantedBy=multi-user.target
 
 Commands:
 ```
-
 systemctl daemon-reload
 systemctl enable node-temp-server
 systemctl start node-temp-server
