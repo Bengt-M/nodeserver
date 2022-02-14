@@ -9,7 +9,17 @@ The readings are stored in a json file.
 
 ## Install
 
-tbd
+```sh
+# as root
+
+cd /opt
+git clone TBD
+cd nodeserver
+rm -rf .git # optional
+node install
+chown -R apache:apache .
+restorecon -v .
+```
 
 ## Setup as a systemd service
 
