@@ -13,10 +13,11 @@ The readings are stored in a json file.
 # as root
 
 cd /opt
-git clone TBD
+rm -rf nodeserver
+git clone https://github.com/Bengt-M/nodeserver.git
 cd nodeserver
 rm -rf .git # optional
-node install
+npm install
 chown -R apache:apache .
 restorecon -v .
 ```
