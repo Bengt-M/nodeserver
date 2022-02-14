@@ -14,13 +14,12 @@ router.get('/', (req, res, next) => {
     );
     let loadedReadings = [];
     try {
-        const data = fs.readFileSync('readings.json', "utf8");
-        loadedReadings = JSON.parse(data);
+        const filedata = fs.readFileSync('readings.json', "utf8");
+        const data = JSON.parse(filedata);
     } catch (err) {
         console.log(err);
     }
-    const response = loadedReadings;
-    res.status(200).json(response);
+    res.status(200).json(data);
 });
 
 router.post('/', (req, res, next) => {
