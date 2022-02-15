@@ -1,25 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
+const cors = require('cors');
 
 // The data is POSTed by the sensor and stored in a JSON file
 // A client may GET that file
 
-router.get('/', (req, res, next) => {
+router.get('/', cors(), (req, res, next) => {
     console.log("get");
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Cache-Control", "no-store");
-    res.header(
-        "Access-Control-Allow-Headers"
-    );
     let loadedReadings = [];
     try {
         const filedata = fs.readFileSync('readings.json', "utf8");
         const data = JSON.parse(filedata);
+        res.status(200).json(data);
     } catch (err) {
         console.log(err);
     }
-    res.status(200).json(data);
 });
 
 router.post('/', (req, res, next) => {

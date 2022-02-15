@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
+const cors = require('cors');
 
 // here are commands to change the data
 
-router.post('/reset', (req, res, next) => {
+router.options('/reset', cors()) // enable pre-flight request
+router.post('/reset', cors(), (req, res, next) => {
     console.log("post reset");
     let data = {};
     try {
@@ -26,7 +28,9 @@ router.post('/reset', (req, res, next) => {
     });
 });
 
-router.post('/clear', (req, res, next) => {
+
+router.options('/clear', cors()) // enable pre-flight request
+router.post('/clear', cors(), (req, res, next) => {
     console.log("post clear");
     try {
         fs.rmSync('readings.json');
