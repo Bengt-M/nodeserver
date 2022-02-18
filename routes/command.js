@@ -15,10 +15,12 @@ router.post('/reset', cors(), (req, res, next) => {
     } catch (err) {
         data.readings = [];
     }
-    data.tmn = 1000;
-    data.tmx = -1000;
-    data.hmn = 1000;
-    data.hmx = -1000;
+    const t = data.readings[data.readings.length - 1].t;
+    const h = data.readings[data.readings.length - 1].h;
+    data.tmn = t;
+    data.tmx = t;
+    data.hmn = h;
+    data.hmx = h;
 
     fs.writeFileSync('readings.json', JSON.stringify(data));
     console.log('data saved ', data.readings.length);
