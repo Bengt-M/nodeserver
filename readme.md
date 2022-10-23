@@ -19,7 +19,20 @@ cd nodeserver
 rm -rf .git # optional
 npm install
 chown -R apache:apache .
-restorecon -v .
+restorecon -R -v .
+```
+
+```sh
+# as root
+
+cd /opt
+rm -rf nodeserver
+cp -R /home/bengt/node-react-workspace/nodeserver .
+cd nodeserver
+rm -rf .git # optional
+npm install
+chown -R apache:apache .
+restorecon -R -v .
 ```
 
 ## Setup as a systemd service
