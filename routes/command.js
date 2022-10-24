@@ -26,7 +26,7 @@ router.post('/reset', cors(), (req, res, next) => {
     console.log('data saved ', data.readings.length);
 
     res.status(201).json({
-        message: 'Handling POST requests to /cmd'
+        message: 'Handling POST requests to /cmd/reset'
     });
 });
 
@@ -42,7 +42,7 @@ router.post('/clear', cors(), (req, res, next) => {
     }
 
     res.status(201).json({
-        message: 'Handling POST requests to /cmd'
+        message: 'Handling POST requests to /cmd/clear'
     });
 });
 
