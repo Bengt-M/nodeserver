@@ -23,7 +23,7 @@ router.post('/reset', cors(), (req, res, next) => {
     data.hmx = h;
 
     fs.writeFileSync('readings.json', JSON.stringify(data));
-    console.log('data saved ', data.readings.length);
+    console.log('data saved ', data.readings);
 
     res.status(201).json({
         message: 'Handling POST requests to /cmd/reset'

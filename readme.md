@@ -17,6 +17,7 @@ rm -rf nodeserver
 git clone https://github.com/Bengt-M/nodeserver.git
 cd nodeserver
 rm -rf .git # optional
+rm -rf .gitignore
 npm install
 chown -R apache:apache .
 restorecon -R -v .

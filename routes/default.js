@@ -19,7 +19,7 @@ router.get('/', cors(), (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    console.log("post");
+    console.log("post " + req.body);
     let data = {};
     try {
         const filedata = fs.readFileSync('readings.json', "utf8");
@@ -33,6 +33,7 @@ router.post('/', (req, res, next) => {
         data.hmx = -1000;
         data.readings = [];
     }
+    console.log("data " + data);
 
     // req.body.dt = new Date().toLocaleString('sv-SE', { timeZone: 'CET' });
     req.body.dt = new Date();
@@ -42,9 +43,11 @@ router.post('/', (req, res, next) => {
     }
     if (req.body.t < data.tmn) {
         data.tmn = req.body.t;
+        console.log("data.tmn= " + data.tmn);
     }
     if (req.body.t > data.tmx) {
         data.tmx = req.body.t;
+        console.log("data.tmx= " + data.tmx);
     }
     if (req.body.h < data.hmn) {
         data.hmn = req.body.h;
@@ -53,7 +56,8 @@ router.post('/', (req, res, next) => {
         data.hmx = req.body.h;
     }
     fs.writeFileSync('readings.json', JSON.stringify(data));
-    console.log('data saved ', data.readings.length);
+    console.log('data received ', JSON.stringify(req.body));
+    // console.log('data saved ', data);
 
     res.status(201).json({
         message: 'Handling POST requests to /'
