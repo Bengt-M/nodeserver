@@ -8,7 +8,6 @@ import cors from 'cors';
 router.options('/reset', cors()) // enable pre-flight request
 router.post('/reset', cors(), (req, res, next) => {
     console.log("post reset");
-    type dataType = { tmn: number, tmx: number, hmn: number, hmx:number, readings:any };
     let data: dataType;
     try {
         const filedata = fs.readFileSync('readings.json', "utf8");
@@ -24,7 +23,7 @@ router.post('/reset', cors(), (req, res, next) => {
     data.hmx = h;
 
     fs.writeFileSync('readings.json', JSON.stringify(data));
-    console.log('data saved ', data.readings);
+    //    console.log('data saved ', data.readings);
 
     res.status(201).json({
         message: 'Handling POST requests to /cmd/reset'

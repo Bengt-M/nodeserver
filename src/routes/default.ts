@@ -20,7 +20,7 @@ router.get('/', cors(), (req, res, next) => {
 
 router.post('/', (req, res, next) => {
     console.log("post " + req.body);
-    type dataType = { tmn: number, tmx: number, hmn: number, hmx:number, readings:any };
+    let reading: readingType = req.body;
     let data: dataType;
     try {
         const filedata = fs.readFileSync('readings.json', "utf8");
@@ -37,8 +37,10 @@ router.post('/', (req, res, next) => {
     console.log("data " + data);
 
     // req.body.dt = new Date().toLocaleString('sv-SE', { timeZone: 'CET' });
-    req.body.dt = new Date();
-    data.readings.push(req.body);
+    reading.dt = new Date();
+ //   data.readings.push(reading);
+    //data.readings[data.readings.length] = reading;
+    data.readings = [data.readings, reading];
     while (data.readings.length > 800) {
         data.readings.shift();
     }
