@@ -1,7 +1,7 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const fs = require('fs');
-const cors = require('cors');
+import fs from 'fs';
+import cors from 'cors';
 
 // The data is POSTed by the sensor and stored in a JSON file
 // A client may GET that file
@@ -20,7 +20,8 @@ router.get('/', cors(), (req, res, next) => {
 
 router.post('/', (req, res, next) => {
     console.log("post " + req.body);
-    let data = {};
+    type dataType = { tmn: number, tmx: number, hmn: number, hmx:number, readings:any };
+    let data: dataType;
     try {
         const filedata = fs.readFileSync('readings.json', "utf8");
         data = JSON.parse(filedata);
@@ -64,4 +65,4 @@ router.post('/', (req, res, next) => {
     });
 });
 
-module.exports = router;
+export default router;

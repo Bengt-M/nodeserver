@@ -1,1 +1,4 @@
+bin/
+# TS -incremental file
+tsconfig.tsbuildinfo
 node_modules

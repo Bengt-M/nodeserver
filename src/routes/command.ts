@@ -1,14 +1,15 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const fs = require('fs');
-const cors = require('cors');
+import fs from 'fs';
+import cors from 'cors';
 
 // here are commands to change the data
 
 router.options('/reset', cors()) // enable pre-flight request
 router.post('/reset', cors(), (req, res, next) => {
     console.log("post reset");
-    let data = {};
+    type dataType = { tmn: number, tmx: number, hmn: number, hmx:number, readings:any };
+    let data: dataType;
     try {
         const filedata = fs.readFileSync('readings.json', "utf8");
         data = JSON.parse(filedata);
@@ -46,4 +47,4 @@ router.post('/clear', cors(), (req, res, next) => {
     });
 });
 
-module.exports = router;
+export default router;
