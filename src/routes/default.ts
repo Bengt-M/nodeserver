@@ -33,7 +33,6 @@ router.post('/', (req, res, next) => {
     data.readings[data.readings.length] = reading;
     while (data.readings.length > 800) {
         data.readings.shift();
-        console.log("shifting");
     }
     data.tmn = Math.min(reading.t, data.tmn);
     data.tmx = Math.max(reading.t, data.tmx);
