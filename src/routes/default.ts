@@ -38,7 +38,7 @@ router.post('/', (req, res, next) => {
     data.tmx = Math.max(reading.t, data.tmx);
     data.hmn = Math.min(reading.h, data.hmn);
     data.hmx = Math.max(reading.h, data.hmx);
-    console.log(data.tmn + " / " + reading.t + " / " + data.tmx;
+    console.log(data.tmn + " / " + reading.t + " / " + data.tmx);
     fs.writeFileSync('readings.json', JSON.stringify(data));
     res.status(201).json({
         message: 'Handling POST requests to /'
