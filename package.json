@@ -2,7 +2,7 @@
   "name": "node-temp-server",
   "version": "1.0.0",
   "engines": {
-    "node": "18.12.0"
+    "node": "^18.12.0"
   },
   "description": "A Node.js RESTful API driven by a NodeMCU (Arduino) Temperature Sensor",
   "main": "server.js",
