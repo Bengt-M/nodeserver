@@ -6,17 +6,19 @@ import cors from 'cors';
 // The data is POSTed by the sensor and stored in a JSON file
 // A client may GET that file
 
+router.options('/', cors()) // enable pre-flight request
 router.get('/', cors(), (req, res, next) => {
     let loadedReadings = [];
     try {
         const filedata = fs.readFileSync('readings.json', "utf8");
         const data = JSON.parse(filedata);
-        res.status(200).json(data);
+        res.status(200).json(data);  // TODO: Do I have to parse it and then json it again?
     } catch (err) {
-        console.log("get err", err);
+        console.log("get err ", err);
     }
 });
 
+router.options('/', cors()) // enable pre-flight request
 router.post('/', (req, res, next) => {
     let reading: readingType = req.body;
     console.log("reading", reading.t);
@@ -31,13 +33,17 @@ router.post('/', (req, res, next) => {
     }
     reading.dt = new Date().toString();
     data.readings[data.readings.length] = reading;
-    while (data.readings.length > 800) {
+    while (data.readings.length > 1200) {
         data.readings.shift();
     }
-    data.tmn = Math.min(reading.t, data.tmn);
-    data.tmx = Math.max(reading.t, data.tmx);
-    data.hmn = Math.min(reading.h, data.hmn);
-    data.hmx = Math.max(reading.h, data.hmx);
+    let dmi = 100;
+    let dma = -100;
+    for (var i = 0; i < data.readings.length; i++) {
+        dmi = Math.min(dmi, data.readings[i].t);
+        dma = Math.max(dma, data.readings[i].t);
+    }
+    data.tmn = dmi;
+    data.tmx = dma;
     console.log(data.tmn + " / " + reading.t + " / " + data.tmx);
     fs.writeFileSync('readings.json', JSON.stringify(data));
     res.status(201).json({
