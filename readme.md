@@ -47,7 +47,7 @@ After=network.target
 
 [Service]
 WorkingDirectory=/opt/nodeserver
-ExecStart=/bin/node server.js
+ExecStart=/bin/node ./bin/server.js
 Type=simple
 Restart=on-failure
 StandardOutput=syslog
