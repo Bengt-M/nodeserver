@@ -36,6 +36,7 @@ router.post('/', (req, res, next) => {
     while (data.readings.length > 1200) {
         data.readings.shift();
     }
+    //TODO: don't use new vars here
     //TODO: also calculate min max for humidity
     let dmi = 100;
     let dma = -100;
