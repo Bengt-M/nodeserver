@@ -31,11 +31,12 @@ router.post('/', (req, res, next) => {
     } catch (err) {
         console.log("post err");
     }
-    reading.dt = new Date().toString();
+    reading.dt = new Date().toString(); //TODO: find a more compact time format
     data.readings[data.readings.length] = reading;
     while (data.readings.length > 1200) {
         data.readings.shift();
     }
+    //TODO: also calculate min max for humidity
     let dmi = 100;
     let dma = -100;
     for (var i = 0; i < data.readings.length; i++) {
