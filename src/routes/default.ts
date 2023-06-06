@@ -32,7 +32,7 @@ router.post('/', (req, res, next) => {
     } catch (err) {
         console.log("post err");
     }
-    reading.dt = new Date().toString(); //TODO: find a more compact time format
+    reading.dt = Date.now();
     data.readings[data.readings.length] = reading;
     while (data.readings.length > 1200) {
         data.readings.shift();
