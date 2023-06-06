@@ -11,8 +11,6 @@ router.get('/', cors(), (req, res, next) => {
     let loadedReadings = [];
     try {
         const filedata = fs.readFileSync('readings.json', "utf8");
-        //const data = JSON.parse(filedata);
-        //res.status(200).json(data);  // TODO: Do I have to parse it and then json it again?
         res.status(200).send(filedata);
     } catch (err) {
         console.log("get err ", err);
