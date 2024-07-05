@@ -9,7 +9,7 @@ router.options('/clear', cors()) // enable pre-flight request
 router.post('/clear', cors(), (req, res, next) => {
     console.log("post clear");
     try {
-        fs.rmSync('readings.json');
+        fs.rmSync('readings.json'); //TODO: add option force
         console.log('data cleared ');
     } catch (err) {
         console.log(err);
