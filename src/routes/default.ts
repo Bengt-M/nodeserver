@@ -19,10 +19,11 @@ router.get('/', cors(), (req, res, next) => {
 
 router.options('/', cors()) // enable pre-flight request
 router.post('/', (req, res, next) => {
+    console.log("req.body ", req.body);
     let reading: readingType = req.body;
-    console.log("reading", reading.t);
+//    console.log("reading", reading.t);
     let data: dataType = {
-        tmn: 1000, tmx: -1000, hmn: 1000, hmx: -1000, readings: new Array<readingType>
+        tmn: 1000, tmx: -1000, readings: new Array<readingType>
     };
     try {
         const filedata = fs.readFileSync('readings.json', "utf8");
@@ -38,8 +39,6 @@ router.post('/', (req, res, next) => {
     for (var i = 0; i < data.readings.length; i++) {
         data.tmn = Math.min(data.tmn, data.readings[i].t);
         data.tmx = Math.max(data.tmx, data.readings[i].t);
-        data.hmn = Math.min(data.hmn, data.readings[i].h);
-        data.hmx = Math.max(data.hmx, data.readings[i].h);
     }
     console.log(data.tmn + " / " + reading.t + " / " + data.tmx);
     fs.writeFileSync('readings.json', JSON.stringify(data));
